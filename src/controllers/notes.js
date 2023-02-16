@@ -22,6 +22,25 @@ class Notes {
     const note = await Note.findById(id);
     res.send({ note });
   };
+
+  static updateNoteByIdHandler = async (req, res) => {
+    const { id } = req.params;
+    const { tittle, body } = req.body;
+
+    const updatedAt = new Date().toISOString();
+
+    const data = { tittle, body, updatedAt };
+
+    const note = await Note.findByIdAndUpdate(id, data);
+    res.send({ note });
+  };
+
+  static deleteNoteByIdHandler = async (req, res) => {
+    const { id } = req.params;
+
+    const note = await Note.findByIdAndRemove(id);
+    res.send({ note });
+  };
 }
 
 module.exports = Notes;
