@@ -12,8 +12,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: create .env file
         run: touch .env
-          echo PORT=${{ secrets.PORT }}
-          echo MONGO_URI=${{ secrets.MONGO_URI }}
+          echo PORT=${{ secrets.PORT }} >> .env
+          echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
           cat .env
       - name: Setup Fly
         uses: superfly/flyctl-actions/setup-flyctl@master
