@@ -14,7 +14,6 @@ class Notes {
 
   static getAllNotesHandler = async (req, res) => {
     let notes = await Note.find();
-    const { tittle } = req.query;
 
     notes = notes.map((note) => ({
       tittle: note.tittle,

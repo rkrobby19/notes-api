@@ -11,7 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: create .env file
-        run: touch .env
+        run: |
+          touch .env
           echo PORT=${{ secrets.PORT }} >> .env
           echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
           cat .env
