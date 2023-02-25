@@ -4,19 +4,22 @@ on:
   push:
     branch: ["dev"]
 
-env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
 jobs:
   build:
     name: Deploy to fly
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: create .env file
-        run: touch .env
-          echo PORT=${{ secrets.PORT }}
-          echo MONGO_URI=${{ secrets.MONGO_URI }}
+        run: |
+          touch .env
+          echo PORT=${{ secrets.PORT }} >> .env
+          echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
           cat .env
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy
+      - name: Setup Fly
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploy
+        run: echo ${{ secrets.FLY_API_TOKEN }}
+          flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

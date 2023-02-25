@@ -13,7 +13,13 @@ class Notes {
   };
 
   static getAllNotesHandler = async (req, res) => {
-    const notes = await Note.find();
+    let notes = await Note.find();
+
+    notes = notes.map((note) => ({
+      tittle: note.tittle,
+      note: note.body,
+    }));
+
     res.send({ notes });
   };
 
