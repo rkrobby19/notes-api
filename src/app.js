@@ -23,6 +23,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
+
 app.use("/api", notesRouter);
 
 const port = process.env.PORT || 3000;
