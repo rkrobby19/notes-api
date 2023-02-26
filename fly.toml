@@ -7,9 +7,6 @@ processes = []
 
 [env]
 
-[deploy]
-  release_command = "npm run start:dev"
-
 [experimental]
   auto_rollback = true
 
